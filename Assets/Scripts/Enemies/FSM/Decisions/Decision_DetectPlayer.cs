@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Decision_DetectPlayer : MonoBehaviour
+public class Decision_DetectPlayer : FSM_Decision
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float aggroRange;
+    [SerializeField] LayerMask playerLayer;
+    EnemyBrain enemyBrain;
+    private void Awake()
     {
-        
+        enemyBrain = GetComponent<EnemyBrain>();
     }
-
-    // Update is called once per frame
-    void Update()
+    public override bool Decide()
     {
-        
+        return DetectPlayer();
+    }
+    private bool DetectPlayer()
+    {
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, aggroRange, playerLayer);
+        if(playerCollider != null )
+        {
+            enemyBrain.Player = playerCollider.transform;
+            return true;
+        }
+        enemyBrain.Player = null;
+        return false;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, aggroRange);
     }
 }

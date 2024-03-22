@@ -2,25 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyState
+{
+    NONE, WANDER, PATROL, CHASE, ATTACK
+}
 public class EnemyBrain : MonoBehaviour
 {
-    [SerializeField] EnemyStateID enemyStateID;
+    [SerializeField] EnemyState enemyState;
     [SerializeField] FSM_State[] states;
     public FSM_State CurrentState { get; set; }
+    public Transform Player { get; set; }
     private void Start()
     {
-        ChangeState(enemyStateID);
+        ChangeState(enemyState);
     }
     private void Update()
     {
-        UpdateState();
+        if (CurrentState == null) return;
+        UpdateState(this);
+        CurrentState.UpdateState(this);
     }
-    public void UpdateState()
+    public void UpdateState(EnemyBrain brain)
     {
         CurrentState.ExecuteActions();
-        CurrentState.ExecuteTransitions();
+        CurrentState.ExecuteTransitions(brain);
     }
-    private FSM_State GetState(EnemyStateID enemyStateID)
+    private FSM_State GetState(EnemyState enemyStateID)
     {
         for (int i = 0;  i < states.Length; i++)
         {
@@ -31,9 +38,9 @@ public class EnemyBrain : MonoBehaviour
         }
         return null;
     }
-    public void ChangeState(EnemyStateID newStateID)
+    public void ChangeState(EnemyState newStateID)
     {
-        var newState = GetState(newStateID);
+        FSM_State newState = GetState(newStateID);
         if (newState == null) return;
         CurrentState = newState;
     }

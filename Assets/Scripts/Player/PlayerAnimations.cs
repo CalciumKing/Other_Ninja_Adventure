@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerAnimations : MonoBehaviour
     readonly int isMoving = Animator.StringToHash("isMoving");
     readonly int gotKilled = Animator.StringToHash("gotKilled");
     readonly int revived = Animator.StringToHash("revived");
+    readonly int isAttacking = Animator.StringToHash("isAttacking");
 
     Animator anim;
 
@@ -28,6 +30,10 @@ public class PlayerAnimations : MonoBehaviour
     {
         anim.SetFloat(moveX, direction.x);
         anim.SetFloat(moveY, direction.y);
+    }
+    public void SetAttackingAnimation(bool value)
+    {
+        anim.SetBool(isAttacking, value);
     }
     public void handleReviveAnimation()
     {

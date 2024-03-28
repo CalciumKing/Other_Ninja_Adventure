@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   CurrentLevel: 1
-  CurrentHealth: 99
+  CurrentHealth: 10
   MaxHealth: 10
   CurrentMana: 5
   MaxMana: 5

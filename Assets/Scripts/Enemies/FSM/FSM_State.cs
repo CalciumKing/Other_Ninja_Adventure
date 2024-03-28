@@ -23,7 +23,7 @@ public class FSM_State
     }
     public void ExecuteTransitions(EnemyBrain brain)
     {
-        if (Transitions == null || Transitions.Length <= 0) return;
+        if (Transitions == null || Transitions.Length == 0) return;
         for (int i = 0; i < Transitions.Length; i++)
         {
             bool value = Transitions[i].Decision.Decide();
@@ -36,7 +36,7 @@ public class FSM_State
             }
             else
             {
-                if (Transitions[i].TrueState != EnemyState.NONE)
+                if (Transitions[i].FalseState != EnemyState.NONE)
                 {
                     brain.ChangeState(Transitions[i].FalseState);
                 }

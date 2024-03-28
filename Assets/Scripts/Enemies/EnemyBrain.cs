@@ -19,7 +19,6 @@ public class EnemyBrain : MonoBehaviour
     private void Update()
     {
         if (CurrentState == null) return;
-        UpdateState(this);
         CurrentState.UpdateState(this);
     }
     public void UpdateState(EnemyBrain brain)
@@ -40,7 +39,7 @@ public class EnemyBrain : MonoBehaviour
     }
     public void ChangeState(EnemyState newStateID)
     {
-        FSM_State newState = GetState(newStateID);
+        var newState = GetState(newStateID);
         if (newState == null) return;
         CurrentState = newState;
     }

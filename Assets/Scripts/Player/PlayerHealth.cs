@@ -19,7 +19,9 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     }
     public void TakeDamage(float amount)
     {
+        if (playerStats.CurrentHealth <= 0f) return;
         playerStats.CurrentHealth -= amount;
+        DamageManager.i.ShowDamageText(amount, this.transform);
         if (playerStats.CurrentHealth <= 0)
         {
             Die();

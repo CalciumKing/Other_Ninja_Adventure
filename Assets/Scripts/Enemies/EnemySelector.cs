@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySelector : MonoBehaviour
 {
     [SerializeField] GameObject selectorSprite;
-    EnemyBrain brain;
+    private EnemyBrain brain;
     private void Awake()
     {
         brain = GetComponent<EnemyBrain>();
@@ -19,6 +19,8 @@ public class EnemySelector : MonoBehaviour
     {
         if (brain == enemyBrain)
             selectorSprite.SetActive(true);
+        else
+            selectorSprite.SetActive(false);
     }
     private void DeactivateSelector()
     {

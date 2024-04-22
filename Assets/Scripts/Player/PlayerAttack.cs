@@ -7,12 +7,12 @@ public class PlayerAttack : MonoBehaviour
     private PlayerActions actions;
     private PlayerAnimations playerAnim;
     private EnemyBrain target;
-    Coroutine attackCoroutine;
+    private Coroutine attackCoroutine;
+
     private void Awake()
     {
         actions = new PlayerActions();
         playerAnim = GetComponent<PlayerAnimations>();
-
     }
     private void Start()
     {
@@ -22,7 +22,8 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Attack()
     {
-        if (target == null) return;
+        if (target == null)
+            return;
         if(attackCoroutine != null)
             StopCoroutine(attackCoroutine);
         attackCoroutine = StartCoroutine(AttackCo());

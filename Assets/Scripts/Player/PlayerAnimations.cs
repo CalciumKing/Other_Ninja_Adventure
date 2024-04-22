@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    readonly int moveX = Animator.StringToHash("moveX");
-    readonly int moveY = Animator.StringToHash("moveY");
-    readonly int isMoving = Animator.StringToHash("isMoving");
-    readonly int gotKilled = Animator.StringToHash("gotKilled");
-    readonly int revived = Animator.StringToHash("revived");
-    readonly int isAttacking = Animator.StringToHash("isAttacking");
+    private readonly int moveX = Animator.StringToHash("moveX");
+    private readonly int moveY = Animator.StringToHash("moveY");
+    private readonly int isMoving = Animator.StringToHash("isMoving");
+    private readonly int gotKilled = Animator.StringToHash("gotKilled");
+    private readonly int revived = Animator.StringToHash("revived");
+    private readonly int isAttacking = Animator.StringToHash("isAttacking");
 
-    Animator anim;
+    private Animator anim;
 
     private void Awake()
     {

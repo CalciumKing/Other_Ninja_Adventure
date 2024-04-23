@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerMana : MonoBehaviour
 {
     [SerializeField] PlayerStats playerStats;
+    public float CurrentMana { get; private set; }
+    private void Start()
+    {
+        CurrentMana = playerStats.CurrentMana;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -14,9 +19,11 @@ public class PlayerMana : MonoBehaviour
     }
     public void UseMana(float amount)
     {
-        if(playerStats.CurrentMana >= amount)
-        {
-            playerStats.CurrentMana -= amount;
-        }
+        playerStats.CurrentMana = Mathf.Max(playerStats.CurrentMana -= amount, 0f);
+        CurrentMana = playerStats.CurrentMana;
+    }
+    public void ResetMana()
+    {
+        CurrentMana = playerStats.CurrentMana;
     }
 }

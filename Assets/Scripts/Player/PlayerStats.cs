@@ -10,6 +10,10 @@ public class PlayerStats : ScriptableObject
     public float MaxHealth;
     public float CurrentMana;
     public float MaxMana;
+
+    public float BaseDamage;
+    public float CriticalDamage;
+    public float CriticalChance;
     public void ResetPlayer()
     {
         CurrentHealth = MaxHealth;

@@ -22,7 +22,7 @@ public class EnemySelector : MonoBehaviour
         else
             selectorSprite.SetActive(false);
     }
-    private void DeactivateSelector()
+    public void DeactivateSelector()
     {
         selectorSprite.SetActive(false);
     }

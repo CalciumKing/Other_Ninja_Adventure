@@ -32,6 +32,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Start()
     {
+        EquipWeapon(initWeapon);
         CurrentWeapon = initWeapon;
         actions.Attack.ClickAttack.performed += ctx => Attack();
         SelectionManager.OnEnemySelected += SetCurrentTarget;
@@ -144,5 +145,10 @@ public class PlayerAttack : MonoBehaviour
             damage += damage * (ps.CriticalDamage / 100);
 
         return damage;
+    }
+    void EquipWeapon(Weapon newWeapon)
+    {
+        CurrentWeapon = newWeapon;
+        ps.TotalDamage = ps.BaseDamage + CurrentWeapon.Damage;
     }
 }

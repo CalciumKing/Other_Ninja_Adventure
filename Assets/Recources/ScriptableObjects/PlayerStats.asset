@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22532ed136702b45a67874dba507de1, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
+  CurrentHealth: 29
+  MaxHealth: 100
+  CurrentMana: 50
+  MaxMana: 50
   CurrentLevel: 1
-  CurrentHealth: 910
-  MaxHealth: 10
-  CurrentMana: 979
-  MaxMana: 999
+  CurrentXP: 2
+  TotalXP: 70
+  NextLevelXP: 10
+  InitLevelXP: 1
+  XPMultiplier: 10
   BaseDamage: 2
   CriticalDamage: 5
   CriticalChance: 0.5
+  TotalDamage: 7

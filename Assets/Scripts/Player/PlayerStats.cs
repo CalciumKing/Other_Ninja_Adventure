@@ -1,6 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+public enum AttributeType
+{
+    STRENGTH,
+    DEXTERITY,
+    INTELLIGENCE
+}
 
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "PlayerStats/Create new Stats")]
 public class PlayerStats : ScriptableObject
@@ -27,6 +32,13 @@ public class PlayerStats : ScriptableObject
     public float CriticalDamage;
     public float CriticalChance;
     public float TotalDamage;
+
+    [Header("Attributes")]
+    public int Strength;
+    public int Dexterity;
+    public int Intelligence;
+    public int AvailablePoints;
+
     public void ResetPlayer()
     {
         CurrentHealth = MaxHealth;
@@ -35,5 +47,13 @@ public class PlayerStats : ScriptableObject
         CurrentXP = 0f;
         NextLevelXP = InitLevelXP;
         TotalXP = 0;
+
+        BaseDamage = 2;
+        CriticalChance = 10;
+        CriticalDamage = 50;
+        Strength = 0;
+        Dexterity = 0;
+        Intelligence = 0;
+        AvailablePoints = 0;
     }
 }

@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
-    [SerializeField] PlayerStats playerStats;
-    PlayerAnimations playerAnimation;
+    [SerializeField] PlayerStats ps;
+    private PlayerAnimations playerAnimation;
     private void Awake()
     {
         playerAnimation = GetComponent<PlayerAnimations>();
     }
     public void TakeDamage(float amount)
     {
-        if (playerStats.CurrentHealth <= 0f) return;
-        playerStats.CurrentHealth -= amount;
+        if (ps.CurrentHealth <= 0f) return;
+        ps.CurrentHealth -= amount;
         DamageManager.i.ShowDamageText(amount, this.transform);
-        if (playerStats.CurrentHealth <= 0)
+        if (ps.CurrentHealth <= 0)
         {
             Die();
         }
@@ -23,5 +23,15 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     private void Die()
     {
         playerAnimation.HandleDeadAnimation();
+    }
+    public bool CanRestoreHealth()
+    {
+        return ps.CurrentHealth > 0f && ps.CurrentHealth < ps.MaxHealth;
+    }
+    public void RestoreHealth(float amount)
+    {
+        ps.CurrentHealth += amount;
+        if (ps.CurrentHealth >= ps.MaxHealth)
+            ps.CurrentHealth = ps.MaxHealth;
     }
 }

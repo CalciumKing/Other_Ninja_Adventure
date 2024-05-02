@@ -29,11 +29,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI statCurrentXP;
     [SerializeField] TextMeshProUGUI statNextLevelXP;
 
+    [Header("Attrbutes UI")]
+    [SerializeField] TextMeshProUGUI availablePoints;
+    [SerializeField] TextMeshProUGUI strength;
+    [SerializeField] TextMeshProUGUI dexterity;
+    [SerializeField] TextMeshProUGUI intelligence;
 
-    private void Update()
+
+    private void Start()
     {
-        UpdatePlayerUI();
+        PlayerUpgrade.OnPlayerUpgrade += PlayerUpgraded;
     }
+    private void PlayerUpgraded()
+    {
+        UpdateStatsPannel();
+    }
+    private void Update() { UpdatePlayerUI(); }
     private void UpdatePlayerUI()
     {
         healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, ps.CurrentHealth / ps.MaxHealth, 10f * Time.deltaTime);
@@ -49,9 +60,7 @@ public class UIManager : MonoBehaviour
     {
         statsPanel.SetActive(!statsPanel.activeSelf);
         if (statsPanel.activeSelf)
-        {
             UpdateStatsPannel();
-        }
     }
     private void UpdateStatsPannel()
     {
@@ -63,5 +72,9 @@ public class UIManager : MonoBehaviour
         statCurrentXP.text = ps.CurrentXP.ToString();
         statNextLevelXP.text = ps.NextLevelXP.ToString();
 
+        availablePoints.text = $"Points: {ps.AvailablePoints}";
+        strength.text = ps.Strength.ToString();
+        dexterity.text = ps.Dexterity.ToString();
+        intelligence.text = ps.Intelligence.ToString();
     }
 }

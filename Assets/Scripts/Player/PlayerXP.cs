@@ -17,6 +17,7 @@ public class PlayerXP : MonoBehaviour
     public void NextLevel()
     {
         ps.CurrentLevel++;
+        ps.AvailablePoints++;
         var currentXPRequired = ps.NextLevelXP;
         var newNextLevel = Mathf.Round(currentXPRequired + ps.NextLevelXP * (ps.XPMultiplier / 100f));
         ps.NextLevelXP = newNextLevel;

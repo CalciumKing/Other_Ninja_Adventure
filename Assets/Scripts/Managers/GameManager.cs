@@ -1,19 +1,13 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager i;
+    [SerializeField] PlayerData playerData;
 
-
-    [SerializeField] Transform player;
-
-    private void Awake()
-    {
-        i = this;
-    }
+    public PlayerData PlayerData => playerData;
     public void AddPlayerXP(float xpAmount)
     {
-        PlayerXP playerXP = player.GetComponent<PlayerXP>();
+        PlayerXP playerXP = playerData.GetComponent<PlayerXP>();
         playerXP.AddXP(xpAmount);
     }
 }

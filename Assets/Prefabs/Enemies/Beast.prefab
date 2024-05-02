@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8205802814279694681}
   - component: {fileID: 8477911258026712403}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,6 +106,8 @@ GameObject:
   - component: {fileID: 4637252080644614870}
   - component: {fileID: 574168446261027121}
   - component: {fileID: 2832660753435019483}
+  - component: {fileID: 5949243674257372114}
+  - component: {fileID: 3668170410856711245}
   m_Layer: 6
   m_Name: Beast
   m_TagString: Enemy
@@ -420,3 +422,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectorSprite: {fileID: 4663743898273364626}
+--- !u!114 &5949243674257372114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329108014353350684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6315414ce7503d04ba1891aa3149af62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+--- !u!114 &3668170410856711245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329108014353350684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1083c5e40b72046835444e33194cf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xpDropped: 5

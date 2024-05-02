@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NPC Walk
+  m_Controller: {fileID: 9100000, guid: 3a89763af83807c4083bb56cb00b2bde, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a914b36f5fdc93c4398305bde066ffee, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: bab9ee3da878c9c49933cab2c776407f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 206e41f94163be64f8d60ea145cb3f9d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9672752ecdc71474cb8f135962fc8bdb, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e44f583230f769f41b64b3298f85878a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fc6dfd2354ad7d640aed92d16abbe9ac, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: cbe1a45276ca4934aa438a80eea7df69, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e2340118825e07a4a80e79ed744d92fa, type: 2}

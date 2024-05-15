@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +17,7 @@ public class Inventory : Singleton<Inventory>
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            AddItem(testItem, 15);
+            AddItem(testItem, 1);
         }
     }
 
@@ -27,9 +26,9 @@ public class Inventory : Singleton<Inventory>
         if (item == null || quantity <= 0)
             return;
         List<int> itemIndexes = CheckItemStock(item.ID);
-        if(item.IsStackable && itemIndexes.Count > 0 )
+        if (item.IsStackable && itemIndexes.Count > 0)
         {
-            foreach(int index in itemIndexes)
+            foreach (int index in itemIndexes)
             {
                 int currentMaxStack = item.MaxStack;
                 if (invItems[index].Quantity < currentMaxStack)
@@ -42,14 +41,40 @@ public class Inventory : Singleton<Inventory>
                         AddItem(item, diff);
                     }
                     InventoryUI.i.DrawSlot(invItems[index], index);
+                    return;
                 }
             }
         }
         int quantityToAdd = (quantity > item.MaxStack) ? item.MaxStack : quantity;
         AddItemToFreeSlot(item, quantityToAdd);
         int remainingAmount = quantity - quantityToAdd;
-        if(remainingAmount > 0)
+        if (remainingAmount > 0)
             AddItem(item, remainingAmount);
+    }
+    private void RemoveItem(int index)
+    {
+        if (invItems[index] == null)
+            return;
+
+        invItems[index].Quantity--;
+
+        if (invItems[index].Quantity <= 0)
+        {
+            invItems[index] = null;
+            InventoryUI.i.DrawSlot(null, index);
+        }
+        else
+        {
+            InventoryUI.i.DrawSlot(invItems[index], index);
+        }
+    }
+    public void UseItem(int index)
+    {
+        if (invItems[index] == null)
+            return;
+
+        if (invItems[index].UseItem())
+            RemoveItem(index);
     }
     private List<int> CheckItemStock(string itemID)
     {
@@ -75,6 +100,16 @@ public class Inventory : Singleton<Inventory>
             invItems[i].Quantity = quantity;
             InventoryUI.i.DrawSlot(invItems[i], i);
             return;
+        }
+    }
+    private void CheckSlotForItem()
+    {
+        for(int i = 0; i < invSize; i++)
+        {
+            if (invItems[i] == null)
+            {
+                InventoryUI.i.DrawSlot(null, i);
+            }
         }
     }
 }

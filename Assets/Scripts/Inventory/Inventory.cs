@@ -1,3 +1,4 @@
+using BayatGames.SaveGameFree;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +7,18 @@ public class Inventory : Singleton<Inventory>
     [SerializeField] int invSize;
     [SerializeField] InventoryItem[] invItems;
     [SerializeField] InventoryItem testItem;
+    private readonly string INVENTORY_KEY_DATA = "MY_INVENTORY";
+    [SerializeField] GameContent gameContent;
 
     public int InventorySize => invSize;
+    public InventoryItem[] InventoryItems => invItems;
 
     private void Start()
     {
         invItems = new InventoryItem[invSize];
+        CheckSlotForItem();
+        LoadInventory();
+        //SaveGame.Delete(INVENTORY_KEY_DATA);
     }
     private void Update()
     {
@@ -41,6 +48,7 @@ public class Inventory : Singleton<Inventory>
                         AddItem(item, diff);
                     }
                     InventoryUI.i.DrawSlot(invItems[index], index);
+                    SaveInventory();
                     return;
                 }
             }
@@ -50,12 +58,10 @@ public class Inventory : Singleton<Inventory>
         int remainingAmount = quantity - quantityToAdd;
         if (remainingAmount > 0)
             AddItem(item, remainingAmount);
+        SaveInventory();
     }
-    private void RemoveItem(int index)
+    private void DecreaseItem(int index)
     {
-        if (invItems[index] == null)
-            return;
-
         invItems[index].Quantity--;
 
         if (invItems[index].Quantity <= 0)
@@ -68,13 +74,33 @@ public class Inventory : Singleton<Inventory>
             InventoryUI.i.DrawSlot(invItems[index], index);
         }
     }
+    public void RemoveItem(int index)
+    {
+        if (invItems[index] == null)
+            return;
+
+        invItems[index].RemoveItem();
+        invItems[index] = null;
+        InventoryUI.i.DrawSlot(null, index);
+        SaveInventory();
+    }
     public void UseItem(int index)
     {
         if (invItems[index] == null)
             return;
 
         if (invItems[index].UseItem())
-            RemoveItem(index);
+            DecreaseItem(index);
+        SaveInventory();
+    }
+    public void EquipItem(int index)
+    {
+        if (invItems[index] == null)
+            return;
+        if (invItems[index].Type != ItemType.WEAPON)
+            return;
+
+        invItems[index].EquipItem();
     }
     private List<int> CheckItemStock(string itemID)
     {
@@ -104,11 +130,69 @@ public class Inventory : Singleton<Inventory>
     }
     private void CheckSlotForItem()
     {
-        for(int i = 0; i < invSize; i++)
+        for (int i = 0; i < invSize; i++)
         {
             if (invItems[i] == null)
             {
                 InventoryUI.i.DrawSlot(null, i);
+            }
+        }
+    }
+    private void SaveInventory()
+    {
+        InventoryData saveData = new InventoryData();
+        saveData.ItemContent = new string[invSize];
+        saveData.ItemQuantity = new int[invSize];
+
+        for (int i = 0; i < invSize; i++)
+        {
+            if (invItems[i] == null)
+            {
+                saveData.ItemContent[i] = null;
+                saveData.ItemQuantity[i] = 0;
+            }
+            else
+            {
+                saveData.ItemContent[i] = invItems[i].ID;
+                saveData.ItemQuantity[i] = invItems[i].Quantity;
+            }
+        }
+        SaveGame.Save(INVENTORY_KEY_DATA, saveData);
+    }
+    private InventoryItem ItemInGameContent(string itemID)
+    {
+        for (int i = 0; i < invSize; i++)
+        {
+            print(invSize);
+            print(gameContent.GameItems.Length);
+            if (gameContent.GameItems[i].ID == itemID)
+            {
+                return gameContent.GameItems[i];
+            }
+        }
+        return null;
+    }
+    private void LoadInventory()
+    {
+        if (SaveGame.Exists(INVENTORY_KEY_DATA))
+        {
+            InventoryData loadData = SaveGame.Load<InventoryData>(INVENTORY_KEY_DATA);
+            for (int i = 0; i < invSize; i++)
+            {
+                if (loadData.ItemContent[i] != null)
+                {
+                    InventoryItem itemFromContent = ItemInGameContent(loadData.ItemContent[i]);
+                    if (itemFromContent != null)
+                    {
+                        invItems[i] = itemFromContent.CreateItem();
+                        invItems[i].Quantity = loadData.ItemQuantity[i];
+                        InventoryUI.i.DrawSlot(invItems[i], i);
+                    }
+                    else
+                    {
+                        invItems[i] = null;
+                    }
+                }
             }
         }
     }

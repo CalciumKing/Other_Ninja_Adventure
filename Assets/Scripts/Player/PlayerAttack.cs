@@ -135,7 +135,7 @@ public class PlayerAttack : MonoBehaviour
         if (distanceToTarget <= attackRange)
             target.GetComponent<IDamagable>()?.TakeDamage(GetAttackDamage());
     }
-    float GetAttackDamage()
+    private float GetAttackDamage()
     {
         var damage = ps.BaseDamage;
         damage += CurrentWeapon.Damage;
@@ -146,7 +146,7 @@ public class PlayerAttack : MonoBehaviour
 
         return damage;
     }
-    void EquipWeapon(Weapon newWeapon)
+    public void EquipWeapon(Weapon newWeapon)
     {
         CurrentWeapon = newWeapon;
         ps.TotalDamage = ps.BaseDamage + CurrentWeapon.Damage;

@@ -35,7 +35,7 @@ public class InventoryItem : ScriptableObject
     }
     public virtual void EquipItem()
     {
-
+        
     }
     public virtual void RemoveItem()
     {

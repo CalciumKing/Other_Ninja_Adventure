@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : Singleton<InventoryUI>
 {
@@ -11,15 +13,25 @@ public class InventoryUI : Singleton<InventoryUI>
     [SerializeField] GameObject inventoryPanel;
     private List<InventorySlot> slotList = new List<InventorySlot>();
 
+    [SerializeField] GameObject descriptionPanel;
+    [SerializeField] Image itemIcon;
+    [SerializeField] TextMeshProUGUI itemName;
+    [SerializeField] TextMeshProUGUI itemDescription;
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
     private void Start()
     {
-        InitInventory();
         InventorySlot.OnSlotSelected += SlotSelected;
+        InitInventory();
     }
     public InventorySlot CurrentSlot { get; set; }
     void SlotSelected(int index)
     {
         CurrentSlot = slotList[index];
+        ShowItemDesciption(index);
     }
     private void InitInventory()
     {
@@ -32,6 +44,8 @@ public class InventoryUI : Singleton<InventoryUI>
     }
     public void UseItem()
     {
+        if (CurrentSlot == null)
+            return;
         Inventory.i.UseItem(CurrentSlot.Index);
     }
     public void DrawSlot(InventoryItem item, int index)
@@ -48,5 +62,32 @@ public class InventoryUI : Singleton<InventoryUI>
     public void ToggleInventory()
     {
         inventoryPanel.SetActive(!inventoryPanel.activeSelf);
+        if (!inventoryPanel.activeSelf)
+        {
+            descriptionPanel.SetActive(false);
+            CurrentSlot = null;
+        }
+    }
+    public void RemoveItem()
+    {
+        if (CurrentSlot == null)
+            return;
+        Inventory.i.RemoveItem(CurrentSlot.Index);
+    }
+    public void EquipItem()
+    {
+        if (CurrentSlot == null)
+            return;
+
+        Inventory.i.EquipItem(CurrentSlot.Index);
+    }
+    public void ShowItemDesciption(int index)
+    {
+        if (Inventory.i.InventoryItems[index] == null)
+            return;
+        descriptionPanel.SetActive(true);
+        itemIcon.sprite = Inventory.i.InventoryItems[index].Icon;
+        itemName.text = Inventory.i.InventoryItems[index].Name;
+        itemDescription.text = Inventory.i.InventoryItems[index].Description;
     }
 }

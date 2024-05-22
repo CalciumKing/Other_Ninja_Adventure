@@ -6,4 +6,8 @@ using UnityEngine;
 public class Item_Weapon : InventoryItem
 {
     public Weapon weapon;
+    public override void EquipItem()
+    {
+        WeaponManager.i.EquipWeapon(weapon);
+    }
 }

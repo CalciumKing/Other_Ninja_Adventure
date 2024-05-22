@@ -11,11 +11,14 @@ public class PlayerData : MonoBehaviour
 
     [SerializeField] Item_HealthPotion healthPotion;
     [SerializeField] Item_ManaPotion manaPotion;
+    private PlayerAttack playerAttack;
 
     public PlayerStats PlayerStats => playerStats;
     public PlayerHealth PlayerHealth => playerHealth;
+    public PlayerAttack PlayerAttack => playerAttack;
     private void Awake()
     {
+        playerAttack = GetComponent<PlayerAttack>();
         playerAnimation = GetComponent<PlayerAnimations>();
         playerMana = GetComponent<PlayerMana>();
         playerHealth = GetComponent<PlayerHealth>();

@@ -28,7 +28,7 @@ public class Inventory : Singleton<Inventory>
         }
     }
 
-    private void AddItem(InventoryItem item, int quantity)
+    public void AddItem(InventoryItem item, int quantity)
     {
         if (item == null || quantity <= 0)
             return;
@@ -163,8 +163,6 @@ public class Inventory : Singleton<Inventory>
     {
         for (int i = 0; i < invSize; i++)
         {
-            print(invSize);
-            print(gameContent.GameItems.Length);
             if (gameContent.GameItems[i].ID == itemID)
             {
                 return gameContent.GameItems[i];

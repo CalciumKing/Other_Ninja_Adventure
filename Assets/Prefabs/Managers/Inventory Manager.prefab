@@ -46,32 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invSize: 24
-  invItems:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  invItems: []
   testItem: {fileID: 11400000, guid: 86fa6e2b59a9d3b40a8c164717f6c3fd, type: 2}
+  gameContent: {fileID: 11400000, guid: 60da42c4f56ee3a4ca9bd5e7ae196702, type: 2}
 --- !u!114 &3763765675025401955
 MonoBehaviour:
   m_ObjectHideFlags: 0

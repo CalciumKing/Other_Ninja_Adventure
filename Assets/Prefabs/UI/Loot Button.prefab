@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 5938654512276636327}
   - component: {fileID: 3094066396928145308}
   - component: {fileID: 3784126570507261724}
+  - component: {fileID: -875967652783320075}
   m_Layer: 5
   m_Name: Loot Button
   m_TagString: Untagged
@@ -465,4 +466,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3094066396928145308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -875967652783320075}
+        m_TargetAssemblyTypeName: LootButton, Assembly-CSharp
+        m_MethodName: CollectItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-875967652783320075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115829437912802257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde35fffd61c47840860c5b4218ffe28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 2690929615334166664}
+  itemName: {fileID: 5821188340898121144}
+  itemQuantity: {fileID: 2288224207081442297}

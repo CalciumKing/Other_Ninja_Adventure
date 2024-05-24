@@ -10,12 +10,14 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     private Animator anim;
     private EnemyBrain brain;
     private EnemySelector selector;
+    private Rigidbody2D rb;
 
     public static event Action OnEnemyDead;
     public float CurrentHealth { get; private set; }
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         brain = GetComponent<EnemyBrain>();
         selector = GetComponent<EnemySelector>();
@@ -44,7 +46,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
         anim.SetTrigger("gotKilled");
         brain.enabled = false;
         selector.DeactivateSelector();
-        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        rb.bodyType = RigidbodyType2D.Static;
         OnEnemyDead?.Invoke();
         GameManager.i.AddPlayerXP(eml.XPDropped);
     }

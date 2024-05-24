@@ -24,16 +24,16 @@ public class SelectionManager : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, enemyMask);
             if (hit.collider != null)
             {
-                //EnemyBrain enemy = hit.collider.GetComponent<EnemyBrain>();
                 if (hit.collider.TryGetComponent(out EnemyBrain enemy))
                 {
-                    OnEnemySelected?.Invoke(enemy);
+                    if (enemy.GetComponent<EnemyHealth>().CurrentHealth <= 0f)
+                    {
+                        EnemyLoot enemyLoot = enemy.GetComponent<EnemyLoot>();
+                        LootManager.i.ShowLoot(enemyLoot);
+                    }
+                    else
+                        OnEnemySelected?.Invoke(enemy);
                 }
-
-                /*if (enemy != null)
-                {
-                    
-                }*/
             }
             else
             {

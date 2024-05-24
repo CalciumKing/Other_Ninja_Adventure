@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +25,7 @@ public class InventoryUI : Singleton<InventoryUI>
         InitInventory();
     }
     public InventorySlot CurrentSlot { get; set; }
-    void SlotSelected(int index)
+    private void SlotSelected(int index)
     {
         CurrentSlot = slotList[index];
         ShowItemDesciption(index);

@@ -34,6 +34,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
         if (CurrentHealth <= 0f)
         {
             DisablePlayer();
+            QuestManager.i.AddProgress("kill2enemies", 1);
         }
         else
         {

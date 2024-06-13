@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe42a2f296476a48941bd9e7415b87f, type: 3}
+  m_Name: Quest_KillEnemies
+  m_EditorClassIdentifier: 
+  Name: Killing in the name of...
+  ID: kill2enemies
+  QuestGoal: 2
+  Description: Kill 2 Enemies
+  GoldReward: 10
+  XPReward: 30
+  ItemReward:
+    Item: {fileID: 11400000, guid: 61f7b6983fafe204c85e848660c2ff90, type: 2}
+    Quantity: 2
+  CurrentStatus: 2
+  QuestCompleted: 1
+  QuestAccepted: 1

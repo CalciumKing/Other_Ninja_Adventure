@@ -35,10 +35,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dexterity;
     [SerializeField] TextMeshProUGUI intelligence;
 
+    [Header("Quest Panel")]
+    [SerializeField] GameObject npcQuestPanel;
+    [SerializeField] GameObject playerQuestPanel;
 
     private void Start()
     {
         PlayerUpgrade.OnPlayerUpgrade += PlayerUpgraded;
+        DialogManager.OnExtraInteraction += HandleExtraInteraction;
     }
     private void PlayerUpgraded()
     {
@@ -76,5 +80,26 @@ public class UIManager : MonoBehaviour
         strength.text = ps.Strength.ToString();
         dexterity.text = ps.Dexterity.ToString();
         intelligence.text = ps.Intelligence.ToString();
+    }
+
+    public void ToggleNPCQuestPanel(bool value)
+    {
+        npcQuestPanel.SetActive(value);
+    }
+    public void TogglePlayerQuestPanel()
+    {
+        playerQuestPanel.SetActive(!playerQuestPanel.activeSelf);
+    }
+    void HandleExtraInteraction(InteractionType type)
+    {
+        switch (type)
+        {
+            case InteractionType.Quest:
+                ToggleNPCQuestPanel(true);
+                break;
+
+            case InteractionType.Shop:
+                break;
+        }
     }
 }
